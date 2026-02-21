@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="content">
+  <div class="container-fluid">
+    <h4 class="page-title">Colleges</h4>
+
+    <a href="{% url 'college-add' %}" class="btn btn-success btn-rounded mb-3">
+      Add College
+    </a>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>College Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for college in colleges %}
+        <tr>
+          <td>{{ college.college_name }}</td>
+          <td>
+            <a href="#">Edit</a> |
+            <a href="#" class="text-danger">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="2" class="text-center">No records found</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% include 'includes/pagination.html' %}
+  </div>
+</div>
+{% endblock %}
