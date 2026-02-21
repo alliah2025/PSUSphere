@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="content">
+  <div class="container-fluid">
+    <h4 class="page-title">Organization Members</h4>
+
+    <a href="{% url 'orgmember-add' %}" class="btn btn-success btn-rounded mb-3">
+      Add Member
+    </a>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Organization</th>
+          <th>Date Joined</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for member in members %}
+        <tr>
+          <td>{{ member.student }}</td>
+          <td>{{ member.organization }}</td>
+          <td>{{ member.date_joined }}</td>
+          <td>
+            <a href="{% url 'orgmember-update' member.id %}">Edit</a> |
+            <a href="{% url 'orgmember-delete' member.id %}" class="text-danger">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="4" class="text-center">No records found</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% include 'includes/pagination.html' %}
+  </div>
+</div>
+{% endblock %}
