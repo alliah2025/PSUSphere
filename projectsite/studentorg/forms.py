@@ -10,6 +10,7 @@ from .models import Program
 class OrganizationForm(ModelForm):
     class Meta:
         model = Organization
+        fields = '__all__'
 
 class OrgMemberForm(ModelForm):
     class Meta:
@@ -29,3 +30,4 @@ class StudentForm(ModelForm):
 class ProgramForm(ModelForm):
     class Meta:
         model = Program
+        fields = "__all__"
