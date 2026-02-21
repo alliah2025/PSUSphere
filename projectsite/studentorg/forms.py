@@ -1,8 +1,31 @@
 from django.forms import ModelForm
 from django import forms
 from .models import Organization
+from .models import OrgMember
+from .models import College
+from .models import Student
+from .models import Program
+
 
 class OrganizationForm(ModelForm):
     class Meta:
         model = Organization
+
+class OrgMemberForm(ModelForm):
+    class Meta:
+        model = OrgMember
         fields = "__all__"
+
+class CollegeForm(ModelForm):
+    class Meta:
+        model = College
+        fields = "__all__"
+
+class StudentForm(ModelForm):
+    class Meta:
+        model = Student
+        fields = "__all__"
+
+class ProgramForm(ModelForm):
+    class Meta:
+        model = Program
