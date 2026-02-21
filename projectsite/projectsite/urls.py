@@ -19,6 +19,13 @@ from django.urls import path
 from studentorg.views import HomePageView, OrganizationList, OrganizationCreateView, OrganizationUpdateView, OrganizationDeleteView
 from studentorg import views
 
+from studentorg.views import (
+    OrgMemberListView, OrgMemberCreateView,
+    OrgMemberUpdateView, OrgMemberDeleteView,
+    CollegeListView, CollegeCreateView,
+    CollegeUpdateView, CollegeDeleteView
+)
+
 urlpatterns = [ 
     path("admin/", admin.site.urls), 
     path('', views.HomePageView.as_view(), name='home'),
@@ -26,6 +33,17 @@ urlpatterns = [
     path('organization_list/add', OrganizationCreateView.as_view(), name='organization-add'),
     path('organization_list/<pk>',OrganizationUpdateView.as_view(), name= 'organization-update'),
     path('organization_list/<pk>/delete', OrganizationDeleteView.as_view(), name='organization-delete'),
-    ] 
+    # Org Members
+    path('orgmembers/', OrgMemberListView.as_view(), name='orgmember-list'),
+    path('orgmembers/add/', OrgMemberCreateView.as_view(), name='orgmember-add'),
+    path('orgmembers/<pk>/', OrgMemberUpdateView.as_view(), name='orgmember-update'),
+    path('orgmembers/<pk>/delete/', OrgMemberDeleteView.as_view(), name='orgmember-delete'),
+
+    # Colleges
+    path('colleges/', CollegeListView.as_view(), name='college-list'),
+    path('colleges/add/', CollegeCreateView.as_view(), name='college-add'),
+    path('colleges/<pk>/', CollegeUpdateView.as_view(), name='college-update'),
+    path('colleges/<pk>/delete/', CollegeDeleteView.as_view(), name='college-delete'),
+        ] 
 
 
