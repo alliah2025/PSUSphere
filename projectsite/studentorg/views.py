@@ -34,24 +34,25 @@ class HomePageView(ListView):
         context["students_joined_this_year"] = count
         return context
 
+
 class OrganizationList(ListView):
     model = Organization
     context_object_name = 'organization'
     template_name = 'org_list.html'
     paginate_by = 5
-    ordering = ["college__college_name","name"]
+    ordering = ["college__college_name", "name"]
 
     def get_queryset(self):
         qs = super().get_queryset()
         query = self.request.GET.get("q")
-
         if query:
             qs = qs.filter(
                 Q(name__icontains=query) |
                 Q(description__icontains=query)
+            )
+        return qs
             )   
 
-        return qs 
 
 class OrganizationCreateView(CreateView):
     model = Organization
@@ -72,11 +73,25 @@ class OrganizationDeleteView(DeleteView):
     template_name = 'org_del.html'
     success_url = reverse_lazy('organization-list')
 
+
+# ─── OrgMember ───────────────────────────────────────────────────────────────
+
 class OrgMemberListView(ListView):
     model = OrgMember
     template_name = 'orgmember_list.html'
     context_object_name = 'members'
     paginate_by = 5
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        query = self.request.GET.get("q")
+        if query:
+            qs = qs.filter(
+                Q(student__firstname__icontains=query) |
+                Q(student__lastname__icontains=query) |
+                Q(organization__name__icontains=query)
+            )
+        return qs
 
 
 class OrgMemberCreateView(CreateView):
@@ -99,11 +114,22 @@ class OrgMemberDeleteView(DeleteView):
     success_url = reverse_lazy('orgmember-list')
 
 
+# ─── College ─────────────────────────────────────────────────────────────────
+
 class CollegeListView(ListView):
     model = College
     template_name = 'college_list.html'
     context_object_name = 'colleges'
     paginate_by = 5
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        query = self.request.GET.get("q")
+        if query:
+            qs = qs.filter(
+                Q(college_name__icontains=query)
+            )
+        return qs
 
 
 class CollegeCreateView(CreateView):
@@ -126,12 +152,26 @@ class CollegeDeleteView(DeleteView):
     success_url = reverse_lazy('college-list')
 
 
+# ─── Student ─────────────────────────────────────────────────────────────────
 
 class StudentListView(ListView):
     model = Student
     template_name = 'student_list.html'
     context_object_name = 'students'
     paginate_by = 5
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        query = self.request.GET.get("q")
+        if query:
+            qs = qs.filter(
+                Q(firstname__icontains=query) |
+                Q(lastname__icontains=query) |
+                Q(middlename__icontains=query) |
+                Q(student_id__icontains=query) |
+                Q(program__prog_name__icontains=query)
+            )
+        return qs
 
 
 class StudentCreateView(CreateView):
@@ -154,6 +194,7 @@ class StudentDeleteView(DeleteView):
     success_url = reverse_lazy('student-list')
 
 
+# ─── Program ─────────────────────────────────────────────────────────────────
 
 class ProgramListView(ListView):
     model = Program
@@ -167,6 +208,16 @@ class ProgramListView(ListView):
         if sort_by in allowed:
             return sort_by
         return "prog_name"
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        query = self.request.GET.get("q")
+        if query:
+            qs = qs.filter(
+                Q(prog_name__icontains=query) |
+                Q(college__college_name__icontains=query)
+            )
+        return qs
 
 
 class ProgramCreateView(CreateView):
