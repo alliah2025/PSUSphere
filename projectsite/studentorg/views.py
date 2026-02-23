@@ -49,7 +49,7 @@ class OrganizationList(ListView):
             qs = qs.filter(
                 Q(name__icontains=query) |
                 Q(description__icontains=query)
-            )
+            )   
 
         return qs 
 
