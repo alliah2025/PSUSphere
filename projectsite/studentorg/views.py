@@ -73,7 +73,7 @@ class OrganizationDeleteView(DeleteView):
     success_url = reverse_lazy('organization-list')
 
 
-# ─── OrgMember ───────────────────────────────────────────────────────────────
+#OrgMember
 
 class OrgMemberListView(ListView):
     model = OrgMember
@@ -151,7 +151,7 @@ class CollegeDeleteView(DeleteView):
     success_url = reverse_lazy('college-list')
 
 
-# ─── Student ─────────────────────────────────────────────────────────────────
+#Student
 
 class StudentListView(ListView):
     model = Student
@@ -193,7 +193,7 @@ class StudentDeleteView(DeleteView):
     success_url = reverse_lazy('student-list')
 
 
-# ─── Program ─────────────────────────────────────────────────────────────────
+#Program
 
 class ProgramListView(ListView):
     model = Program
