@@ -20,8 +20,8 @@
         <tr>
           <td>{{ college.college_name }}</td>
           <td>
-            <a href="#">Edit</a> |
-            <a href="#" class="text-danger">Delete</a>
+            <a href="/colleges/{{ college.id }}">Edit</a> |
+            <a href="/colleges/{{ college.id }}/delete" class="text-danger">Delete</a>
           </td>
         </tr>
         {% empty %}
