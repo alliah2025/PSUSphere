@@ -49,10 +49,9 @@ urlpatterns = [
     path('colleges/add/', CollegeCreateView.as_view(), name='college-add'),
     path('colleges/<pk>/', CollegeUpdateView.as_view(), name='college-update'),
     path('colleges/<pk>/delete/', CollegeDeleteView.as_view(), name='college-delete'),
-        ] 
 
     # Org Members
-    path('orgmembers/', OrgMemberListView.as_view(), name='orgmember-list'),
+     path('orgmembers/', OrgMemberListView.as_view(), name='orgmember-list'),
     path('orgmembers/add/', OrgMemberCreateView.as_view(), name='orgmember-add'),
     path('orgmembers/<pk>/', OrgMemberUpdateView.as_view(), name='orgmember-update'),
     path('orgmembers/<pk>/delete/', OrgMemberDeleteView.as_view(), name='orgmember-delete'),
