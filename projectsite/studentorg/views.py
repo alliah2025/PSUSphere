@@ -50,7 +50,7 @@ class OrganizationList(ListView):
                 Q(name__icontains=query) |
                 Q(description__icontains=query)
             )
-        return qs
+        return qs 
 
 
 class OrganizationCreateView(CreateView):
