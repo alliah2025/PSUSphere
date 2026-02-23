@@ -51,6 +51,8 @@ class OrganizationList(ListView):
                 Q(description__icontains=query)
             )
         return qs 
+       
+        
 
 
 class OrganizationCreateView(CreateView):
