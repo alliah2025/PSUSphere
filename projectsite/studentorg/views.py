@@ -20,6 +20,8 @@ class HomePageView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["total_students"] = Student.objects.count()
+        context["total_organizations"] = Organization.objects.count()
+        context["total_programs"] = Program.objects.count()
 
         today = timezone.now().date()
         count = (
@@ -94,6 +96,12 @@ class OrgMemberListView(ListView):
             )
         return qs
 
+    def get_ordering(self):
+        allowed = ["student__lastname", "date_joined"]
+        sort_by = self.request.GET.get("sort_by")
+        if sort_by in allowed:
+            return sort_by
+        return "student__lastname"
 
 class OrgMemberCreateView(CreateView):
     model = OrgMember
