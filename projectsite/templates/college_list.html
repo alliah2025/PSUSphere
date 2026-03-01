@@ -7,6 +7,21 @@
     <a href="{% url 'college-add' %}" class="btn btn-success btn-rounded mb-3">
       Add College
     </a>
+    <div class="col-md-12">
+    <form method="get" class="row g-2 align-items-center">
+        <div class="col-auto">
+            <label for="smallSelect" class="col-form-label">Sort by</label>
+        </div>
+        <div class="col-auto">
+            <select class="form-control form-control-sm" id="smallSelect" name="sort_by">
+                <option value="college_name" {% if request.GET.sort_by == "college_name" %}selected{% endif %}>College Name</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary btn-sm btn-rounded">Sort</button>
+        </div>
+    </form>
+</div>
 
     <table class="table table-striped">
       <thead>

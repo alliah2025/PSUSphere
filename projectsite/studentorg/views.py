@@ -53,6 +53,13 @@ class OrganizationList(ListView):
                 Q(description__icontains=query)
             )
         return qs 
+    
+    def get_ordering(self):
+        allowed = ["name", "college__college_name"]
+        sort_by = self.request.GET.get("sort_by")
+        if sort_by in allowed:
+            return sort_by
+        return "name"
        
         
 
@@ -139,7 +146,12 @@ class CollegeListView(ListView):
                 Q(college_name__icontains=query)
             )
         return qs
-
+    def get_ordering(self):
+        allowed = ["college_name"]
+        sort_by = self.request.GET.get("sort_by")
+        if sort_by in allowed:
+            return sort_by
+        return "college_name"
 
 class CollegeCreateView(CreateView):
     model = College
@@ -181,6 +193,13 @@ class StudentListView(ListView):
                 Q(program__prog_name__icontains=query)
             )
         return qs
+
+    def get_ordering(self):
+        allowed = ["lastname", "firstname", "student_id"]
+        sort_by = self.request.GET.get("sort_by")
+        if sort_by in allowed:
+            return sort_by
+        return "lastname"
 
 
 class StudentCreateView(CreateView):
