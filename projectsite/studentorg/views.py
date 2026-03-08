@@ -103,13 +103,6 @@ class OrgMemberListView(ListView):
             )
         return qs
 
-    def get_ordering(self):
-        allowed = ["student__lastname", "date_joined"]
-        sort_by = self.request.GET.get("sort_by")
-        if sort_by in allowed:
-            return sort_by
-        return "student__lastname"
-
 class OrgMemberCreateView(CreateView):
     model = OrgMember
     form_class = OrgMemberForm
@@ -146,12 +139,7 @@ class CollegeListView(ListView):
                 Q(college_name__icontains=query)
             )
         return qs
-    def get_ordering(self):
-        allowed = ["college_name"]
-        sort_by = self.request.GET.get("sort_by")
-        if sort_by in allowed:
-            return sort_by
-        return "college_name"
+    
 
 class CollegeCreateView(CreateView):
     model = College
@@ -194,13 +182,6 @@ class StudentListView(ListView):
             )
         return qs
 
-    def get_ordering(self):
-        allowed = ["lastname", "firstname", "student_id"]
-        sort_by = self.request.GET.get("sort_by")
-        if sort_by in allowed:
-            return sort_by
-        return "lastname"
-
 
 class StudentCreateView(CreateView):
     model = Student
@@ -237,15 +218,12 @@ class ProgramListView(ListView):
             return sort_by
         return "prog_name"
 
-    def get_queryset(self):
-        qs = super().get_queryset()
-        query = self.request.GET.get("q")
-        if query:
-            qs = qs.filter(
-                Q(prog_name__icontains=query) |
-                Q(college__college_name__icontains=query)
-            )
-        return qs
+    def get_ordering(self):
+        allowed = ["prog_name", "college__college_name"]
+        sort_by = self.request.GET.get("sort_by")
+        if sort_by in allowed:
+            return sort_by
+        return "prog_name"
 
 
 class ProgramCreateView(CreateView):
