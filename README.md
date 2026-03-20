@@ -33,6 +33,10 @@ PSUSphere provides an admin interface where authenticated users can view and man
 | Organizations | Manage student organizations |
 | Org Members | Track student membership in organizations |
 
+## For Login Credentials
+  Use this Username and Password to be able to access the HomePage. 
+  Username: 202380059@psu.palawan.edu.ph
+  Password: qwerty098
 ## Authors
 
 | Name | Role |
